@@ -7,18 +7,30 @@ start:
     mov ds, ax
     mov es, ax
 
-    mov ax, msg
-    mov bp, ax                    ; es:bp
-    mov cx, 16                    ; cx = String Length
-    mov ax, 01301h                ; ah = 13h, al = 01h
-    mov bx, 000ch                 ; bh = Page(0) bl = 0ch
-    mov dl, 0
-    int 10h                       ; Interupt 10h
+reset:
+    mov ax, 0           ; int13h[AH = 00h]: Reset Drive
+    mov dl, 0           ; Drive = 0
+    int 13h
 
-hang:
-    jmp hang
+    jc reset            ; Exception
 
-msg:  db  "Hello, OS world!"
+read:
+
+    mov ax, 1000h       ; ES:BX = 1000h:0000
+    mov es, ax
+    mov bx, 0
+
+    mov ah, 2           ; int13h[AH = 02h]: Load Drive
+    mov al, 5           ; Load 5 Sectors
+    mov ch, 0           ; Cylinder = 0
+    mov cl, 2           ; Sector   = 2
+    mov dh, 0           ; Head     = 0
+    mov dl, 0           ; Drive    = 0
+    int 13h             ; Load Data to 1000h:1000
+
+    jc read             ; Exception
+
+    jmp 1000h:0000
 
 times 510-($-$$)  db  0
-dw 0xaa55
+dw 0xAA55
