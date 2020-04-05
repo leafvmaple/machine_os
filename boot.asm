@@ -26,7 +26,7 @@ read:
     mov cl, 2           ; Sector   = 2
     mov dh, 0           ; Head     = 0
     mov dl, 0           ; Drive    = 0
-    int 13h             ; Load Data to 1000h:1000
+    int 13h             ; Load Data to 1000h:0000
 
     jc read             ; Exception
 

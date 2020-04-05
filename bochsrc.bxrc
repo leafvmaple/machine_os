@@ -3,9 +3,13 @@ megs:32
 romimage:file=$BXSHARE/BIOS-bochs-latest
 vgaromimage:file=$BXSHARE/VGABIOS-lgpl-latest
 
-floppya:1_44=fd.img,status=inserted
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
 
-boot:floppy
+floppya:1_44=fd.img,status=inserted
+ata0-master: type=disk, mode=flat, path="hd.img"
+
+#boot:floppy
+boot: disk
 
 log:bochsout.txt
 
