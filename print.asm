@@ -1,7 +1,7 @@
 [ORG 0]
     jmp start
 
-msg:  db  "Hello, LEAF OS! "
+msg:  db  "HELLO, LEAF OS! "
 
 start:
     mov ax, cs

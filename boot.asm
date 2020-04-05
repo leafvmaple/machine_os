@@ -9,7 +9,7 @@ start:
 
 reset:
     mov ax, 0           ; int13h[AH = 00h]: Reset Drive
-    mov dl, 0           ; Drive = 0
+    mov dl, 80h         ; Drive = 80h
     int 13h
 
     jc reset            ; Exception
@@ -25,7 +25,7 @@ read:
     mov ch, 0           ; Cylinder = 0
     mov cl, 2           ; Sector   = 2
     mov dh, 0           ; Head     = 0
-    mov dl, 0           ; Drive    = 0
+    mov dl, 80h         ; Drive    = 80h
     int 13h             ; Load Data to 1000h:0000
 
     jc read             ; Exception
