@@ -1,8 +1,4 @@
-[ORG 0]
-
-    jmp 07C0h:start
-
-start:
+[ORG 7C00h]
     mov ax, cs
     mov ds, ax
     mov es, ax
@@ -15,7 +11,6 @@ reset:
     jc reset            ; Exception
 
 read:
-
     mov ax, 1000h       ; ES:BX = 1000h:0000
     mov es, ax
     mov bx, 0

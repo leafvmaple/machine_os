@@ -1,15 +1,10 @@
 [ORG 0]
-    jmp start
-
-msg:  db  "HELLO, LEAF OS! "
-
-start:
     mov ax, cs
     mov ds, ax
     mov es, ax
 
 print:
-    mov ax, msg
+    mov ax, MSG
     mov bp, ax                    ; ES:BP
     mov cx, 16                    ; CX = String Length
     mov ax, 01301h                ; AH = 13h, AL = 01h
@@ -19,6 +14,8 @@ print:
 
 hang:
     jmp hang
+
+MSG:  db  "HELLO, LEAF OS! "
 
 times 510-($-$$)  db  0
 dw 0xAA55
